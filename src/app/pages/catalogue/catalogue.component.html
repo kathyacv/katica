@@ -1,0 +1,187 @@
+<div class="container">
+
+
+    <div class="navbar">
+        <div class="logo">
+            <img src="../assets/logo.png" alt="" srcset="">
+        </div>
+        <div class="menu">
+            <p>Inicio</p>
+            <p>Contáctenos</p>
+
+            <div class="cart">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                    <path
+                        d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                </svg>
+
+            </div>
+        </div>
+
+        <div class="menu-icon">
+            <img src="../../../assets/icons/menu.png" alt="" srcset="">
+        </div>
+    </div>
+
+    <div class="container-products">
+        <aside id="filter">
+            <div *ngIf="makeupCategories && makeupBrands" class="container-filter">
+                <p class="title" style="font-size: 12px; border-bottom: 1px solid gray; padding-bottom: 6px;">
+                    <b>Categorías</b>
+                </p><br>
+
+                <ng-container *ngFor="let category of makeupCategories; let index = index">
+                    <div>
+                        <input class="inp-cbx" (click)="filter(category.name_category, 'category')" [id]="category.id"
+                            type="checkbox" style="display: none" />
+                        <label class="cbx" [for]="category.id">
+                            <span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg>
+                            </span>
+                            <span>{{ category.name_category }}</span>
+                        </label>
+                    </div> <br>
+                </ng-container><br><br>
+
+
+                <p class="title" style="font-size: 12px; border-bottom: 1px solid gray; padding-bottom: 6px;">
+                    <b>Colores</b>
+                </p><br>
+
+                <div class="row">
+                    <div class="dot color-a"></div>
+                    <div class="dot color-b"></div>
+                    <div class="dot color-c"></div>
+                    <div class="dot color-d"></div>
+                    <div class="dot color-e"></div>
+                </div><br><br>
+
+
+                <p class="title" style="font-size: 12px; border-bottom: 1px solid gray; padding-bottom: 6px;">
+                    <b>Marcas</b>
+                </p><br>
+
+                <div *ngFor="let brand of makeupBrands; let index = index">
+                    <div>
+                        <input class="inp-cbx" (click)="filter(brand.name, 'brand')" [id]="brand.id" type="checkbox"
+                            style="display: none" />
+                        <label class="cbx" [for]="brand.id"><span>
+                                <svg width="12px" height="9px" viewbox="0 0 12 9">
+                                    <polyline points="1 5 4 8 11 1"></polyline>
+                                </svg></span><span>{{ brand.name }}</span></label>
+                    </div><br>
+
+                </div><br><br>
+            </div>
+
+        </aside>
+
+        <section class="scroll">
+
+            <div class="row-reverse">
+
+
+                <div>
+                    <button (click)="openFilter()" class="searchButton" href="#">
+                        <i class="material-icons">
+                            filter_list
+                        </i>
+                    </button>
+                </div>
+
+                <div class="searchBox">
+
+                    <input [(ngModel)]="searchText" (ngModelChange)="filterByName()" class="searchInput" type="text"
+                        placeholder="Buscar..">
+                    <button class="searchButton" href="#">
+                        <i class="material-icons">
+                            search
+                        </i>
+                    </button>
+                </div>
+            </div><br>
+
+
+            <div class="grid">
+                <div class="row-center padding" *ngIf="productsFiltered.length == 0">
+                    <div class="column-center"><br><br><br><br>
+                        <img src="https://cdn-icons-png.flaticon.com/128/4826/4826311.png" alt=""><br>
+                        <p>No hay productos por mostrar</p>
+                    </div>
+                </div>
+                <div class="card" *ngFor="let product of productsFiltered">
+
+                    <div class="card-image" [ngStyle]="{background: product.color}">
+                        <img [src]="product.photo_url" alt="">
+                    </div>
+                    <div class="card-info">
+                        <p class="subtitle name">{{ product.name }}</p>
+                        <p class="subtitle category">{{ product.brand }} - {{ product.category }}</p>
+                        <p class="price">{{ product.price | currency:'₡':'symbol':'4.2-2' }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button (click)="showDetail(product.id)">
+                            <span>Ver detalle</span>
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+
+<div class="modal-detail" *ngIf="isDetailOpen">
+    <div class="close" (click)="openDetails()">X</div>
+    <div class="container-detail" [ngStyle]="{background: productDetail.color}">
+
+        <div class="image">
+            <img [src]="productDetail.photo_url" alt="">
+        </div>
+        <div class="detail">
+            <p class="title" style="text-align: end; font-size: 26px;">
+                {{ productDetail.name }}
+            </p>
+            <p class="title" style="text-align: end; font-size: 12px; color: #929292;">
+                {{ productDetail.brand }} - {{ productDetail.category }}
+            </p><br><br>
+
+            <section>
+                <p class="body" style="font-size: 16px; color: #929292;">{{ productDetail.description }}</p>
+            </section><br><br>
+
+            <p class="body" style="font-size: 11px; color: #929292; margin-bottom: 6px;">Colores del producto</p>
+            <div class="row">
+                <ng-container *ngFor="let color of productDetail.colors">
+                    <div class="dot" [ngStyle]="{background: color}"></div>
+                </ng-container>
+
+            </div><br><br>
+
+
+
+            <div class="row-reverse">
+
+                <div>
+                    <p class="body" style="font-size: 11px; color: #929292; margin-bottom: 6px;">Precio</p>
+                    <p class="bold"
+                        style="font-size: 32px; color: var(--primary); margin-bottom: 6px; font-weight: 900;">{{
+                        productDetail.price | currency:'₡':'symbol':'4.2-2' }}</p>
+                </div>
+
+            </div><br><br><br>
+
+
+
+            <button><span>Agregar al carrito</span> </button>
+
+        </div>
+    </div>
+</div>

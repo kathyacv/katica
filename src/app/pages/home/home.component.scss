@@ -1,0 +1,238 @@
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 90px;
+    align-items: flex-end;
+}
+
+.title,
+.subtitle {
+    color: #652882;
+}
+
+.body {
+    color: #555555;
+}
+
+
+
+.picture {
+    z-index: 0;
+    height: 100%;
+    right: -21%;
+    position: absolute;
+    top: -22px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    // z-index: 0;
+    // height: 100%;
+    // right: -444px;
+    // position: absolute;
+    // top: -22px;
+
+    img {
+        width: 70%;
+        object-fit: contain;
+        // width: 100%;
+        // object-fit: cover;
+    }
+}
+
+
+
+.cards {
+    color: #652882;
+    height: 200px;
+    padding: 10px 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    .card {
+        width: 250px;
+        height: 100%;
+        cursor: pointer;
+        color: #555555;
+        margin-right: 70px;
+        vertical-align: top;
+        display: inline-block;
+        height: calc(100% - 20px);
+
+        .imagen {
+            z-index: 999;
+            height: 100%;
+            position: relative;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .card-info {
+            top: -50%;
+            width: 100%;
+            padding: 26px;
+            display: flex;
+            position: relative;
+            border-radius: 10px;
+            background: #f8f3f7;
+            justify-content: flex-end;
+
+            .data {
+                width: 50%;
+
+                .name {
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+
+                .price {
+                    font-size: 20px;
+                    font-weight: 800;
+                }
+
+                .discount {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media screen and (min-width: 800px) {
+    .content .info {
+        width: 50vw;
+        padding: 40px;
+        z-index: 9999;
+        top: 0;
+        position: absolute;
+        height: calc(100% - 80px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .header-info {
+            margin-top: 50px;
+        }
+    }
+
+    // .content .picture {
+    //     visibility: hidden;
+    // }
+}
+
+@media screen and (max-width: 800px) {
+    .content .info {
+        top: 0;
+        width: 100%;
+        z-index: 99;
+        padding: 26px;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: calc(100% - 90px);
+        backdrop-filter: blur(5px);
+        background: rgba(244, 244, 244, 0.8);
+        box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+    }
+}
+
+
+
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 26px 26px 26px 30px;
+    position: relative;
+    margin-top: 100px;
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+
+    p {
+        top: -16px;
+        left: 20px;
+        padding: 0 12px;
+        position: absolute;
+        background: #f8f3f7;
+        color: var(--primary);
+    }
+
+    .facebook,
+    .instagram,
+    .whatsapp {
+        width: 46px;
+        height: 46px;
+        padding: 6px;
+        display: flex;
+        cursor: pointer;
+        font-size: 24px;
+        line-height: 46px;
+        position: relative;
+        margin-right: 30px;
+        border-radius: 32px;
+        align-items: center;
+        justify-content: center;
+        background-color: #eaeaea;
+        background-image: linear-gradient(to bottom, #f6f6f6, #eaeaea);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+
+       
+
+        //   &::before {
+        //     content: '';
+        //     position: absolute;
+        //     z-index: -1;
+        //     top: -8px; right: -8px; bottom: -8px; left: -8px;
+        //     background-color: #eaeaea;
+        //     border-radius: 140px;
+        //     opacity: 0.5;
+
+        //     :hover & {
+        //       opacity: 1;
+        //     }
+        //   }
+
+        svg {
+            height: 80%;
+            fill: var(--primary);
+        }
+    }:hover {
+        transition: 800ms;
+        background: var(--primary);
+        svg {
+            height: 80%;
+            fill: #ffffff;
+        }
+    }
+
+
+}
+
+
+
+.whatsapp:hover {
+    background: #0dd4fc;
+}
+
+.facebook:hover {
+    background-color: #0d3da3;
+}
+
+.instagram:hover {
+    background-color: #d0004c;
+}
+
+.twitch:hover::before {
+    background-color: #f8ebb6;
+}
