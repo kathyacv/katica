@@ -44,10 +44,26 @@ export class CatalogueComponent implements OnInit {
 
   filterList: any[] = []
   searchText: any = ""
+
+  cartProducts: any[] = []
+
   constructor(private local: StorageService, private products_service: ProductsService) { }
 
   ngOnInit(): void {
     this.getAllMakeups()
+    this.getCartProducts()
+  }
+
+  getCartProducts() {
+    this.local.get(StorageKey.Cart).then((cart: any) => {
+      if(cart != null) this.cartProducts = cart;
+      console.log(cart)
+    })
+  }
+
+  setCartProducts(product: any) {
+    this.cartProducts.push(product)
+    this.local.set(StorageKey.Cart, this.cartProducts).then((cart: any) => { })
   }
 
   getAllMakeups() {
@@ -107,6 +123,15 @@ export class CatalogueComponent implements OnInit {
     })
   }
 
+  sendToCart(id: number) {
+
+    let p = this.products.filter(product => {
+      return product.id == id 
+    })[0]
+
+    this.setCartProducts(p)
+  }
+
   showDetail(id: number) {
     console.log(id)
     this.productDetail = this.products.filter(product => {
@@ -115,6 +140,8 @@ export class CatalogueComponent implements OnInit {
 
     this.openDetails()
     console.log(this.productDetail)
+
+    this
   }
 
   openDetails() {

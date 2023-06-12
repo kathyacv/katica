@@ -9,7 +9,7 @@
 
 .title,
 .subtitle {
-    color: #652882;
+    color: var(--primary);
 }
 
 .body {
@@ -19,22 +19,25 @@
 
 
 .picture {
-    z-index: 0;
-    height: 100%;
-    right: -21%;
-    position: absolute;
-    top: -22px;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
     // z-index: 0;
     // height: 100%;
-    // right: -444px;
+    // right: -21%;
     // position: absolute;
     // top: -22px;
+    // display: flex;
+    // justify-content: flex-end;
+    // width: 100%;
+    z-index: 0;
+    height: 76%;
+    right: 0;
+    position: absolute;
+    /* top: 10%; */
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
 
     img {
-        width: 70%;
+        width: 64%;
         object-fit: contain;
         // width: 100%;
         // object-fit: cover;
@@ -43,66 +46,66 @@
 
 
 
-.cards {
-    color: #652882;
-    height: 200px;
-    padding: 10px 0;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
+// .cards {
+//     color: #652882;
+//     height: 200px;
+//     padding: 10px 0;
+//     overflow-x: scroll;
+//     overflow-y: hidden;
+//     white-space: nowrap;
 
-    .card {
-        width: 250px;
-        height: 100%;
-        cursor: pointer;
-        color: #555555;
-        margin-right: 70px;
-        vertical-align: top;
-        display: inline-block;
-        height: calc(100% - 20px);
+//     .card {
+//         width: 250px;
+//         height: 100%;
+//         cursor: pointer;
+//         color: #555555;
+//         margin-right: 70px;
+//         vertical-align: top;
+//         display: inline-block;
+//         height: calc(100% - 20px);
 
-        .imagen {
-            z-index: 999;
-            height: 100%;
-            position: relative;
+//         .imagen {
+//             z-index: 999;
+//             height: 100%;
+//             position: relative;
 
-            img {
-                height: 100%;
-                object-fit: cover;
-            }
-        }
+//             img {
+//                 height: 100%;
+//                 object-fit: cover;
+//             }
+//         }
 
-        .card-info {
-            top: -50%;
-            width: 100%;
-            padding: 26px;
-            display: flex;
-            position: relative;
-            border-radius: 10px;
-            background: #f8f3f7;
-            justify-content: flex-end;
+//         .card-info {
+//             top: -50%;
+//             width: 100%;
+//             padding: 26px;
+//             display: flex;
+//             position: relative;
+//             border-radius: 10px;
+//             background: #f8f3f7;
+//             justify-content: flex-end;
 
-            .data {
-                width: 50%;
+//             .data {
+//                 width: 50%;
 
-                .name {
-                    font-size: 14px;
-                    font-weight: 400;
-                }
+//                 .name {
+//                     font-size: 14px;
+//                     font-weight: 400;
+//                 }
 
-                .price {
-                    font-size: 20px;
-                    font-weight: 800;
-                }
+//                 .price {
+//                     font-size: 20px;
+//                     font-weight: 800;
+//                 }
 
-                .discount {
-                    font-size: 12px;
-                    font-weight: 400;
-                }
-            }
-        }
-    }
-}
+//                 .discount {
+//                     font-size: 12px;
+//                     font-weight: 400;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 
 
@@ -164,7 +167,7 @@
         left: 20px;
         padding: 0 12px;
         position: absolute;
-        background: #f8f3f7;
+        background: #ffffff;
         color: var(--primary);
     }
 
@@ -183,8 +186,8 @@
         border-radius: 32px;
         align-items: center;
         justify-content: center;
-        background-color: #eaeaea;
-        background-image: linear-gradient(to bottom, #f6f6f6, #eaeaea);
+        background-color: #f9f9f9;
+        background-image: linear-gradient(to bottom, #fcfcfc, #eaeaea);
         box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
 
        

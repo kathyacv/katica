@@ -9,13 +9,14 @@
             <p>Inicio</p>
             <p>Contáctenos</p>
 
-            <div class="cart">
-
+            <div class="cart" routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                     <path
                         d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
                 </svg>
-
+                <div *ngIf="cartProducts.length > 0" class="cant">
+                    {{ cartProducts.length }}
+                </div>
             </div>
         </div>
 
@@ -84,25 +85,25 @@
             <div class="row-reverse">
 
 
-                <div>
+                <!-- <div>
                     <button (click)="openFilter()" class="searchButton" href="#">
                         <i class="material-icons">
                             filter_list
                         </i>
                     </button>
-                </div>
+                </div> -->
 
                 <div class="searchBox">
 
                     <input [(ngModel)]="searchText" (ngModelChange)="filterByName()" class="searchInput" type="text"
                         placeholder="Buscar..">
-                    <button class="searchButton" href="#">
+                    <!-- <button class="searchButton" href="#">
                         <i class="material-icons">
                             search
                         </i>
-                    </button>
+                    </button> -->
                 </div>
-            </div><br>
+            </div>
 
 
             <div class="grid">
@@ -112,23 +113,50 @@
                         <p>No hay productos por mostrar</p>
                     </div>
                 </div>
-                <div class="card" *ngFor="let product of productsFiltered">
 
-                    <div class="card-image" [ngStyle]="{background: product.color}">
-                        <img [src]="product.photo_url" alt="">
-                    </div>
-                    <div class="card-info">
-                        <p class="subtitle name">{{ product.name }}</p>
-                        <p class="subtitle category">{{ product.brand }} - {{ product.category }}</p>
-                        <p class="price">{{ product.price | currency:'₡':'symbol':'4.2-2' }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <button (click)="showDetail(product.id)">
-                            <span>Ver detalle</span>
-                        </button>
-                    </div>
-                </div>
+                <ng-container *ngFor="let product of productsFiltered">
+                    <div class="card"> 
+                        <!-- <div class="card" (click)="showDetail(product.id)">  -->
 
+                        
+                        <div class="card-header">
+                            <!--  -->
+                            <div class="row">
+                                <div>
+                                   <p class="subtitle name bold">{{ product.name }}</p>
+                                 <p class="subtitle category">{{ product.category }}</p> 
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="card-image" [ngStyle]="{background: product.color}">
+                            <img [src]="product.photo_url" alt="">
+                        </div>
+                        <div class="card-info">
+                            <div class="info-brand">
+                                <p class="caption bold">MARCA</p>
+                                <p class="subtitle category bold">{{ product.brand | titlecase }}</p>
+                            </div> 
+                            
+                            <p class="price bold">{{ product.price | currency:'₡':'symbol':'4.0' }}</p>
+                        </div>
+                        <div>
+
+                        </div>
+                        <div class="card-footer">
+
+                            <button (click)="sendToCart(product.id)">
+                                <span>Agregar al carrito</span>
+                            </button>
+                            <!-- <button class="cart-card" (click)="showDetail(product.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                    <path
+                                        d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                                </svg>
+                            </button> -->
+                        </div>
+                    </div>
+                </ng-container>
 
             </div>
         </section>
