@@ -78,6 +78,7 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
 
     .logo {
         height: 100%;
+
         img {
             height: 100%;
             object-fit: cover;
@@ -224,7 +225,15 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
     border: 1px solid #f3f3f3;
     box-shadow: 4px 6px 20px -7px rgba(var(--secondary-rgb), 0.2);
     transition: 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    .inCart {
+        width: 10px;
+        height: 10px; 
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 50%;
+        background: #ef6363;
 
+    }
     .add-button {
         width: 40px;
         height: 40px;
@@ -236,12 +245,14 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
         background: var(--primary);
         color: white;
     }
+
     .card-header {
         height: 110px;
         padding: 20px 0;
         max-height: 116px;
-        
+
         .name {
+            cursor: pointer;
             font-size: 20px;
             font-weight: 800;
             color: #565656; //var(--primary);
@@ -260,12 +271,14 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
         width: 100%;
         height: 160px;
         display: flex;
+        cursor: pointer;
         overflow: hidden;
         align-items: center;
         border-radius: 10px;
         justify-content: center;
         transform: rotate(0deg) scale(1);
         transition: 400ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
         //background: #f2f6fa;
         img {
             width: 100%;
@@ -283,18 +296,20 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
         margin-bottom: 24px;
         flex-direction: row;
         justify-content: space-between;
+
         .info-brand {
-           .caption {
-            font-size: 12px;
-            margin-top: 4px;
-            color: #999999;
+            .caption {
+                font-size: 12px;
+                margin-top: 4px;
+                color: #999999;
+            }
+
+            .category {
+                font-size: 14px;
+                color: #383838;
+            }
         }
-        .category {
-            font-size: 14px;
-            color: #383838;
-        } 
-        }
-        
+
 
         .price {
             font-size: 22px;
@@ -383,9 +398,11 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
             transition: 400ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
         }
     }
+
     .card-image {
         transition: 400ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
         transform: rotate(-3deg) scale(1.2);
+
         img {
             mix-blend-mode: multiply !important;
             filter: contrast(1) !important;
@@ -940,6 +957,9 @@ body {
             background: #f9f9f9;
             //box-shadow: 0 4px 30px rgba(var(--secondary-rgb), 0.2);
         }
+        .title {
+            color: var(--primary)
+        }
     }
 }
 
@@ -970,39 +990,39 @@ button {
     padding: 50px;
     padding-top: 120px;
     width: 100%;
-  }
-  
-  .title {
+}
+
+.title {
     color: #eee;
     font-family: sans-serif;
-    font-size: 36px;
+    font-size: clamp(50px, 8vw, 70px); 
     font-weight: 600;
-    margin-top: 30px;
-  }
-  
-  .subtitle {
+    margin-top: 120px;
+}
+
+.subtitle {
     color: #eee;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 25px;
     font-weight: 600;
-    margin-top: 10px;
-  }
-  
-  .input-container {
+    margin-top: 2px;
+}
+
+.input-container {
     height: 50px;
     position: relative;
     width: 100%;
-  }
-  
-  .ic1 {
+}
+
+.ic1 {
     margin-top: 40px;
-  }
-  
-  .ic2 {
+}
+
+.ic2 {
     margin-top: 30px;
-  }
-  
-  .input {
+}
+
+.input {
     background-color: #303245;
     border-radius: 12px;
     border: 0;
@@ -1013,9 +1033,9 @@ button {
     outline: 0;
     padding: 4px 20px 0;
     width: 96%;
-  }
-  
-  .cut {
+}
+
+.cut {
     background-color: #15172b;
     border-radius: 10px;
     height: 20px;
@@ -1025,18 +1045,18 @@ button {
     transform: translateY(0);
     transition: transform 200ms;
     width: 76px;
-  }
-  
-  .cut-short {
+}
+
+.cut-short {
     width: 50px;
-  }
-  
-  .input:focus ~ .cut,
-  .input:not(:placeholder-shown) ~ .cut {
+}
+
+.input:focus~.cut,
+.input:not(:placeholder-shown)~.cut {
     transform: translateY(8px);
-  }
-  
-  .placeholder {
+}
+
+.placeholder {
     color: #65657b;
     font-family: sans-serif;
     left: 20px;
@@ -1046,22 +1066,22 @@ button {
     transform-origin: 0 50%;
     transition: transform 200ms, color 200ms;
     top: 20px;
-  }
-  
-  .input:focus ~ .placeholder,
-  .input:not(:placeholder-shown) ~ .placeholder {
+}
+
+.input:focus~.placeholder,
+.input:not(:placeholder-shown)~.placeholder {
     transform: translateY(-30px) translateX(10px) scale(0.75);
-  }
-  
-  .input:not(:placeholder-shown) ~ .placeholder {
+}
+
+.input:not(:placeholder-shown)~.placeholder {
     color: #808097;
-  }
-  
-  .input:focus ~ .placeholder {
+}
+
+.input:focus~.placeholder {
     color: var(--primary);
-  }
-  
-  .submit {
+}
+
+.submit {
     background-color: var(--primary);
     border-radius: 12px;
     border: 0;
@@ -1074,14 +1094,14 @@ button {
     // outline: 0;
     text-align: center;
     width: 100%;
-  }
-  
-  .submit:active {
+}
+
+.submit:active {
     background-color: #06b;
-  }
+}
 
 
-  .drop-container {
+.drop-container {
     margin-top: 20px;
     position: relative;
     display: flex;
@@ -1096,21 +1116,82 @@ button {
     color: #ffffff;
     cursor: pointer;
     transition: background .2s ease-in-out, border .2s ease-in-out;
-  }
-  
-  .drop-container:hover {
+}
+
+.drop-container:hover {
     background: rgba(var(--secondary-rgb), 0.1);
     border-color: var(--primary);
-  }
-  
-  .drop-container:hover .drop-title {
+}
+
+.drop-container:hover .drop-title {
     color: #ffffff;
-  }
-  
-  .drop-title {
+}
+
+.drop-title {
     color: #fdfdfd;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
     transition: color .2s ease-in-out;
-  }
+}
+
+.loader {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    z-index: 99999999999;
+    flex-direction: column;
+    justify-content: center;
+    backdrop-filter: blur(8.6px);
+    background: rgba(255, 255, 255, 0.8);
+
+    @supports (animation: grow .5s cubic-bezier(.25, .25, .25, 1) forwards) {
+        .tick {
+            stroke-opacity: 0;
+            stroke-dasharray: 50px;
+            stroke-dashoffset: 50px;
+            animation: draw .5s cubic-bezier(.25, .25, .25, 1) forwards;
+            animation-delay: .6s
+        }
+
+        .circle {
+            fill-opacity: 0;
+            stroke: var(--primary);
+            stroke-width: 40px;
+            transform-origin: center;
+            transform: scale(0);
+            animation: grow 1s cubic-bezier(.25, .25, .25, 1.25) forwards;
+        }
+    }
+
+    @keyframes grow {
+        60% {
+            transform: scale(.9);
+            stroke-width: 4px;
+            fill-opacity: 0;
+        }
+
+        100% {
+            transform: scale(.9);
+            stroke-width: 8px;
+            fill-opacity: 1;
+            fill: var(--primary);
+        }
+    }
+
+    @keyframes draw {
+
+        0%,
+        100% {
+            stroke-opacity: 1;
+        }
+
+        100% {
+            stroke-dashoffset: 0;
+        }
+    }
+}

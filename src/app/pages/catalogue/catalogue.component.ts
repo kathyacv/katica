@@ -13,6 +13,7 @@ export interface Product {
   color: string,
   description: string,
   stock: number,
+  discount: string
 }
 
 export interface MakeupCategories {
@@ -46,7 +47,7 @@ export class CatalogueComponent implements OnInit {
   searchText: any = ""
 
   cartProducts: any[] = []
-
+  loading: boolean = false
   constructor(private local: StorageService, private products_service: ProductsService) { }
 
   ngOnInit(): void {
@@ -62,6 +63,7 @@ export class CatalogueComponent implements OnInit {
   }
 
   setCartProducts(product: any) {
+    this.isDetailOpen = false
     this.cartProducts.push(product)
     this.local.set(StorageKey.Cart, this.cartProducts).then((cart: any) => { })
   }
@@ -165,5 +167,9 @@ export class CatalogueComponent implements OnInit {
     this.filterText = ""
     this.filterList = []
     this.searchText = ""
+  }
+
+  isInCart(product: any) {
+    return this.cartProducts.some(p => p.id == product)
   }
 }

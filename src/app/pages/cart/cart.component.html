@@ -1,3 +1,16 @@
+<div class="loader" *ngIf="loading">
+    <div class="svg-container">    
+        <svg class="ft-green-tick" xmlns="http://www.w3.org/2000/svg" height="150" width="150" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="circle" fill="#5bb543" cx="24" cy="24" r="22"/>
+            <path class="tick" fill="none" stroke="#FFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M14 27l5.917 4.917L34 17"/>
+        </svg>
+    </div><br>
+    <p style="color:var(--primary)" class="bold">Se proceso el pedido correctamente</p>
+    <p style="color:var(--primary)">¡Muchas gracias por su preferencia!</p>
+    <br><br><br>
+    <button (click)="goBack()" style="width: 200px;">Regresar</button>
+</div>
+
 <div class="container">
     <div routerLink="/catalogue" routerLinkActive="active" ariaCurrentWhenActive="page" class="back">
         Regresar
@@ -110,8 +123,9 @@
                     <span class="drop-title">Arrastre el comprobante aquí</span>
                     o
                     <input [(ngModel)]="comprobante"  type="file" placeholder="Seleccione el documento" id="images" accept="image/*" required>
-                </label>
+                </label><br><br>
 
+                <p style="color: #dc5757; text-align: center;" *ngIf="verifyForm()">Favor llenar los campos del formulario</p>
 
                 <button (click)="saveDelivery()" type="text" class="submit">Realizar pedido</button>
             </div>
