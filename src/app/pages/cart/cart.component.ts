@@ -35,7 +35,6 @@ export class CartComponent implements OnInit {
       this.cartProducts.forEach(p => p.cant = 1)
       this.getTotal()
       this.setRandomID()
-      console.log(cart)
     })
   }
 
@@ -95,9 +94,7 @@ export class CartComponent implements OnInit {
       status: "ordenado",
       created: currentDayOfMonth + "-" + (currentMonth + 1) + "-" + currentYear,
     }
-    console.log(data)
     this.products_service.setBuyOrder(data).then((resp) => {
-      console.log(resp)
       this.local.remove(StorageKey.Cart).then(() => { })
     })
 

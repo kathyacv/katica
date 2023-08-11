@@ -84,11 +84,9 @@ export class HomeComponent implements OnInit {
 
   getAllMakeups() {
     this.products_service.getMakeupProductsList().subscribe((products) => {
-      //console.log(products)
       this.products = products
       this.productsFiltered = this.products
       this.recommended_product = this.products[Math.floor(Math.random() * this.products.length)];
-      //console.log(this.recommended_product)
       this.getDiscountProducts()
     })
   }
@@ -130,7 +128,6 @@ export class HomeComponent implements OnInit {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      //console.log(data);
     } catch (error) {
       console.error(error);
     }

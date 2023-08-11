@@ -65,7 +65,6 @@ export class CatalogueComponent implements OnInit {
   getCartProducts() {
     this.local.get(StorageKey.Cart).then((cart: any) => {
       if(cart != null) this.cartProducts = cart;
-      //console.log(cart)
     })
   }
 
@@ -77,19 +76,16 @@ export class CatalogueComponent implements OnInit {
 
   getAllMakeups() {
     this.products_service.getMakeupProductsList().subscribe((products) => {
-      //console.log(products)
       this.products = products
       this.productsFiltered = this.products
     })
 
     this.products_service.getMakeupCategories().subscribe((categories) => {
-      //console.log(categories)
       this.makeupCategories = categories
 
     })
 
     this.products_service.getMakeupBrands().subscribe((brands) => {
-      //console.log(brands)
       this.makeupBrands = brands
     })
 
@@ -97,8 +93,6 @@ export class CatalogueComponent implements OnInit {
   }
 
   filter(name: any, type: any) {
-
-    //console.log(this.filterList.includes(name))
     if (this.filterList.includes(name)) {
       const indice = this.filterList.indexOf(name);
       if (indice !== -1) {
@@ -121,7 +115,6 @@ export class CatalogueComponent implements OnInit {
   }
 
   filterByName() {
-    //console.log(this.searchText)
     if (this.searchText == "") {
       this.cleanData()
       this.getAllMakeups()
@@ -142,15 +135,11 @@ export class CatalogueComponent implements OnInit {
   }
 
   showDetail(id: number) {
-    //console.log(id)
     this.productDetail = this.products.filter(product => {
       return product.id == id
     })[0]
 
     this.openDetails()
-    //console.log(this.productDetail)
-
-    this
   }
 
   openDetails() {
