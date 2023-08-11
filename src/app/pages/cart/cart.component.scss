@@ -2,7 +2,7 @@
     display: grid;
     flex-direction: row;
     align-items: flex-end;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     .form {
         width: 100%;
         display: flex;
