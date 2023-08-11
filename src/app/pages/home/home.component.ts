@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Product } from '../catalogue/catalogue.component';
 
@@ -9,7 +9,7 @@ import { Product } from '../catalogue/catalogue.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  
 
   products: Product[] = []
   productsFiltered: Product[] = []
@@ -58,12 +58,21 @@ export class HomeComponent implements OnInit {
   ]
 
   phraseRandom: string = ""
+  
   constructor(private products_service: ProductsService) { }
 
   ngOnInit(): void {
+    this.width = window.innerWidth;
+    
     this.phraseRandom = this.phrases[Math.floor(Math.random() * this.phrases.length)];
     this.getAllMakeups()
     this.removeBackground("https://s3.us-west-2.amazonaws.com/s3.japonesque.com/wp-content/uploads/2021/01/30105000/No-makeup-look-4.jpg")
+  }
+
+  public width: any;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.width = window.innerWidth;
   }
 
   goSocialMedia(page: string) {
@@ -75,11 +84,11 @@ export class HomeComponent implements OnInit {
 
   getAllMakeups() {
     this.products_service.getMakeupProductsList().subscribe((products) => {
-      console.log(products)
+      //console.log(products)
       this.products = products
       this.productsFiltered = this.products
       this.recommended_product = this.products[Math.floor(Math.random() * this.products.length)];
-      console.log(this.recommended_product)
+      //console.log(this.recommended_product)
       this.getDiscountProducts()
     })
   }
@@ -121,7 +130,7 @@ export class HomeComponent implements OnInit {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       console.error(error);
     }

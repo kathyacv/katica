@@ -5,7 +5,7 @@
       <div class="logo">
         <img src="../assets/logo.png" alt="" srcset="">
       </div>
-      <div class="menu">
+      <div class="menu" *ngIf="width > 640">
         <p routerLink="/catalogue">Productos</p>
         <p (click)="scroll(phrases)"> Recomendaciones </p>
         <p (click)="scroll(contactus)"> Contáctenos </p>
@@ -88,6 +88,13 @@
 
   <section #phrases class="phrases">
 
+    <div class="message-daily">
+
+      <p *ngIf="phraseRandom">
+        <b>"</b>{{ phraseRandom }}<b>"</b>
+      </p>
+    </div>
+
     <div class="recommended-product">
       <div class="header">
         <p>Producto recomendado</p>
@@ -112,12 +119,7 @@
 
     </div>
 
-    <div class="message-daily">
-
-      <p *ngIf="phraseRandom">
-        <b>"</b>{{ phraseRandom }}<b>"</b>
-      </p>
-    </div>
+    
 
 
   </section>

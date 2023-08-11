@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { StorageKey, StorageService } from 'src/app/services/localstorage/storage.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 
@@ -51,14 +51,21 @@ export class CatalogueComponent implements OnInit {
   constructor(private local: StorageService, private products_service: ProductsService) { }
 
   ngOnInit(): void {
+    this.width = window.innerWidth;
     this.getAllMakeups()
     this.getCartProducts()
+  }
+
+  public width: any;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.width = window.innerWidth;
   }
 
   getCartProducts() {
     this.local.get(StorageKey.Cart).then((cart: any) => {
       if(cart != null) this.cartProducts = cart;
-      console.log(cart)
+      //console.log(cart)
     })
   }
 
@@ -70,19 +77,19 @@ export class CatalogueComponent implements OnInit {
 
   getAllMakeups() {
     this.products_service.getMakeupProductsList().subscribe((products) => {
-      console.log(products)
+      //console.log(products)
       this.products = products
       this.productsFiltered = this.products
     })
 
     this.products_service.getMakeupCategories().subscribe((categories) => {
-      console.log(categories)
+      //console.log(categories)
       this.makeupCategories = categories
 
     })
 
     this.products_service.getMakeupBrands().subscribe((brands) => {
-      console.log(brands)
+      //console.log(brands)
       this.makeupBrands = brands
     })
 
@@ -91,7 +98,7 @@ export class CatalogueComponent implements OnInit {
 
   filter(name: any, type: any) {
 
-    console.log(this.filterList.includes(name))
+    //console.log(this.filterList.includes(name))
     if (this.filterList.includes(name)) {
       const indice = this.filterList.indexOf(name);
       if (indice !== -1) {
@@ -114,7 +121,7 @@ export class CatalogueComponent implements OnInit {
   }
 
   filterByName() {
-    console.log(this.searchText)
+    //console.log(this.searchText)
     if (this.searchText == "") {
       this.cleanData()
       this.getAllMakeups()
@@ -135,13 +142,13 @@ export class CatalogueComponent implements OnInit {
   }
 
   showDetail(id: number) {
-    console.log(id)
+    //console.log(id)
     this.productDetail = this.products.filter(product => {
       return product.id == id
     })[0]
 
     this.openDetails()
-    console.log(this.productDetail)
+    //console.log(this.productDetail)
 
     this
   }
