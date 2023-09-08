@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { StorageKey, StorageService } from 'src/app/services/localstorage/storage.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 
@@ -14,6 +15,8 @@ export class CartComponent implements OnInit {
   cant = 1
   cartProducts: any[] = []
   totalAmount: any = 0
+  totalNeto: any = 0
+  totalDiscount:any = 0
 
   name: string = ""
   lastname: string = ""
@@ -23,24 +26,40 @@ export class CartComponent implements OnInit {
 
   loading: boolean = false
 
-  constructor(private products_service: ProductsService, private route: Router, private local: StorageService) { }
+  constructor(private cart_service: CartService, private products_service: ProductsService, private route: Router, private local: StorageService) { }
 
   ngOnInit(): void {
     this.getProductsCart()
   }
 
   getProductsCart() {
+    this.cartProducts = []
+    console.log("get cart product")
     this.local.get(StorageKey.Cart).then((cart: any) => {
       this.cartProducts = cart
       this.cartProducts.forEach(p => p.cant = 1)
-      this.getTotal()
+      this.getTotalNeto()
+      this.getTotalDiscount()
+      this.getTotalToPay()
       this.setRandomID()
     })
   }
 
+  deleteCartProduct(id:any) {
+    this.cart_service.deleteCartProduct(this.cartProducts, id)
+    this.getProductsCart()
+  }
 
-  getTotal() {
-    this.totalAmount = this.cartProducts.map(p => p.price * p.cant).reduce((acc, amount) => acc + amount);
+  getTotalNeto() {
+    this.totalNeto = this.cartProducts.map(p => p.price * p.cant).reduce((acc, amount) => acc + amount);
+  }
+
+  getTotalDiscount() {
+    this.totalDiscount = this.cartProducts.map(p => p.discount * p.cant).reduce((acc, amount) => acc + amount);
+  }
+
+  getTotalToPay() {
+    this.totalAmount = this.cartProducts.map(p => (p.discount != "0"?p.discount:p.price) * p.cant).reduce((acc, amount) => acc + amount);
   }
 
   setRandomID() {
@@ -54,7 +73,9 @@ export class CartComponent implements OnInit {
       this.cartProducts.filter(p => p.id == id)[0].cant = cant - 1
     }
 
-    this.getTotal()
+    this.getTotalNeto()
+    this.getTotalDiscount()
+    this.getTotalToPay()
   }
 
   plusCant(id: any) {
@@ -65,8 +86,9 @@ export class CartComponent implements OnInit {
       this.cartProducts.filter(p => p.id == id)[0].cant = cant + 1
     }
 
-
-    this.getTotal()
+    this.getTotalNeto()
+    this.getTotalDiscount()
+    this.getTotalToPay()
   }
 
   verifyForm() {

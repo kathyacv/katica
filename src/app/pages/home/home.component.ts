@@ -1,6 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { Product } from '../catalogue/catalogue.component';
+import { StorageKey, StorageService } from 'src/app/services/localstorage/storage.service';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { RecommendedService } from 'src/app/services/recommended/recommended.service';
 
 
 @Component({
@@ -58,15 +61,84 @@ export class HomeComponent implements OnInit {
   ]
 
   phraseRandom: string = ""
-  
-  constructor(private products_service: ProductsService) { }
+  menuContainer: boolean = false
+  cartProducts: any[] = []
+  productsWithDiscount: any
+  productRecommended: any
+
+  constructor(private recommended_service: RecommendedService, private local: StorageService, private products_service: ProductsService, private cart_service: CartService) { }
 
   ngOnInit(): void {
     this.width = window.innerWidth;
     
     this.phraseRandom = this.phrases[Math.floor(Math.random() * this.phrases.length)];
     this.getAllMakeups()
-    this.removeBackground("https://s3.us-west-2.amazonaws.com/s3.japonesque.com/wp-content/uploads/2021/01/30105000/No-makeup-look-4.jpg")
+    this.getRecommendedProduct() 
+  }
+
+  getCartProducts() {
+    this.cartProducts = []
+    this.productsWithDiscount = []
+    this.local.get(StorageKey.Cart).then((cart: any) => {
+      if(cart != null) this.cartProducts = cart;
+      // this.getDiscountProducts()
+    })
+  }
+
+  getDiscountProducts() {
+    if (this.products.filter(p => p.discount != "0").length) {
+      this.productsWithDiscount = this.products.filter(p => p.discount != "0")
+    } else {
+      this.productsWithDiscount = this.getMultipleRandom(this.products, 6)
+
+    }
+  }
+
+  getAllMakeups() {
+    this.products = []
+    this.products_service.getMakeupProductsList().subscribe((products) => {
+      this.products = products
+      this.productsFiltered = this.products
+      this.recommended_product = this.products[Math.floor(Math.random() * this.products.length)];
+      this.getCartProducts()
+      this.getDiscountProducts()
+    })
+  }
+
+  sendToCart(id: number) {
+    let p = this.products.filter(product => {
+      return product.id == id 
+    })[0]
+
+    this.setCartProducts(p)
+  }
+
+  setCartProducts(product: any) {
+    this.cartProducts.push(product)
+    this.local.set(StorageKey.Cart, this.cartProducts).then((cart: any) => { })
+  }
+
+  isInCart(product: any) {
+    return this.cartProducts.some(p => p.id == product)
+  }
+
+  deleteCartProduct(id:any) {
+    this.cart_service.deleteCartProduct(this.cartProducts, id)
+    this.getAllMakeups()
+  }
+
+  getRecommendedProduct() {
+    this.recommended_service.getRecommendedProducts().subscribe(r => {
+      this.productRecommended = r
+      console.log(this.productRecommended)
+
+      this.recommended_product = this.products.filter(p => p.id == this.productRecommended[0].product)[0]
+      console.log(this.recommended_product )
+    })
+  }
+
+  openMenu() {
+    this.menuContainer = this.menuContainer? false:true
   }
 
   public width: any;
@@ -82,56 +154,15 @@ export class HomeComponent implements OnInit {
   }
 
 
-  getAllMakeups() {
-    this.products_service.getMakeupProductsList().subscribe((products) => {
-      this.products = products
-      this.productsFiltered = this.products
-      this.recommended_product = this.products[Math.floor(Math.random() * this.products.length)];
-      this.getDiscountProducts()
-    })
-  }
+  
 
-  getDiscountProducts() {
-    if (this.products.filter(p => p.discount != "0").length) {
-      return this.products.filter(p => p.discount != "0")
-    } else {
-      return this.getMultipleRandom(this.products, 6)
-
-    }
-  }
+  
 
   getMultipleRandom(arr: Product[], num: number) {
     const shuffled = [...arr].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, num);
   }
 
-
-  async removeBackground(img: string) {
-
-
-
-    const url = 'https://sdk.photoroom.com/v1/segment';
-    const form = new FormData();
-    await form.append('image_file', img);
-
-
-    const options: any = {
-      method: 'POST',
-      headers: {
-        Accept: 'image/png, application/json',
-        'x-api-key': '373da7be933818dc1e6cb28515808dda9f677142'
-      }
-    };
-
-    options.body = form;
-
-    try {
-      const response = await fetch(url, options);
-      const data = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   public onValueChangeName(event: Event): void {
     const value = (event.target as any).value;
@@ -144,7 +175,7 @@ export class HomeComponent implements OnInit {
   }
 
   async sendMessage() {
-    const number = 50687202653
+    const number = 50688967637
     const message_katy = `Hola soy ${this.name} y ${this.messageForm}`;
     const url = `https://api.whatsapp.com/send?phone=${number}&text=${message_katy}`
 

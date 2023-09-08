@@ -90,7 +90,10 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
         flex-direction: row;
         justify-content: space-around;
         margin-right: 26px;
-
+        svg {
+            height: 40px;
+            width: 40px;
+        }
         p {
             display: flex;
             cursor: pointer;
@@ -123,11 +126,22 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
     align-items: center;
 }
 
+.row-between {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .column-center {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.column {
+    display: flex;
+    flex-direction: column;
 }
 
 .row-reverse {
@@ -157,7 +171,7 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
 
     .close {
         top: 26px;
-        right: 26px;
+        left: 26px;
         width: 30px;
         height: 30px;
         display: flex;
@@ -196,6 +210,7 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
             width: 100%;
             height: 55%;
             padding: 40px;
+            overflow: scroll;
             background: #ffffff;
             border-radius: 100px 0 0 0;
             box-shadow: 0 0 20px -7px rgba(0, 0, 0, 0.2);
@@ -215,7 +230,7 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
     width: 100%;
     display: flex;
     overflow: hidden;
-    position: initial;
+    position: relative;
     padding: 30px 40px;
     background: #ffffff;
     flex-direction: column;
@@ -251,7 +266,7 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
 
         .name {
             cursor: pointer;
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 20px);
             font-weight: 800;
             color: #565656; //var(--primary);
             font-weight: 800 !important;
@@ -317,10 +332,9 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
     }
 
     .card-footer {
-        width: 0;
-        opacity: 0;
+        width: 100%;
         display: flex;
-        height: 0;
+       // height: 0;
         flex-direction: row;
         justify-content: space-between;
 
@@ -407,12 +421,12 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
         }
     }
 
-    .card-footer {
-        opacity: 1;
-        width: 100%;
-        height: 43px;
-        transition: 600ms ease-in-out;
-    }
+    // .card-footer {
+    //     opacity: 1;
+    //     width: 100%;
+    //     height: 43px;
+    //     transition: 600ms ease-in-out;
+    // }
 }
 
 // .card:active {
@@ -445,48 +459,48 @@ $catalogue-theme: mat.define-light-theme((color: (primary: $catalogue-primary,
     overflow: scroll;
 }
 
-@media screen and (min-width: 800px) {
-    .title {
-        font-family: Quicksand-bold;
-        font-size: 60px;
-    }
+// @media screen and (min-width: 800px) {
+//     .title {
+//         font-family: Quicksand-bold;
+//         font-size: 60px;
+//     }
 
-    .subtitle {
-        font-family: Quicksand-regular;
-        font-size: 30px;
-    }
+//     .subtitle {
+//         font-family: Quicksand-regular;
+//         font-size: 30px;
+//     }
 
-    .body,
-    p,
-    span {
-        font-family: Quicksand-regular !important;
-        font-size: 18px;
-    }
+//     .body,
+//     p,
+//     span {
+//         font-family: Quicksand-regular !important;
+//         font-size: 18px;
+//     }
 
-    .bold {
-        font-weight: 900;
-        font-family: Quicksand-bold !important;
-    }
-}
+//     .bold {
+//         font-weight: 900;
+//         font-family: Quicksand-bold !important;
+//     }
+// }
 
-@media screen and (max-width: 800px) {
-    .title {
-        font-family: Quicksand-bold;
-        font-size: 40px;
-    }
+// @media screen and (max-width: 800px) {
+//     .title {
+//         font-family: Quicksand-bold;
+//         font-size: 40px;
+//     }
 
-    .subtitle {
-        font-family: Quicksand-regular;
-        font-size: 24px;
-    }
+//     .subtitle {
+//         font-family: Quicksand-regular;
+//         font-size: 24px;
+//     }
 
-    .body,
-    p,
-    span {
-        font-family: Quicksand-regular !important;
-        font-size: 14px;
-    }
-}
+//     .body,
+//     p,
+//     span {
+//         font-family: Quicksand-regular !important;
+//         font-size: 14px;
+//     }
+// }
 
 
 .searchBox {
@@ -991,15 +1005,15 @@ button {
 }
 
 .title {
-    color: #eee;
+    color: var(--primary);
     font-family: sans-serif;
     font-size: clamp(50px, 8vw, 70px); 
     font-weight: 600;
-    margin-top: 120px;
+    
 }
 
 .subtitle {
-    color: #eee;
+    color: #acacac;
     font-family: sans-serif;
     font-size: 25px;
     font-weight: 600;

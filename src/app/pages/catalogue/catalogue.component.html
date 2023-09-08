@@ -15,7 +15,7 @@
 <div class="container">
     <div class="navbar">
         <div class="logo">
-            <img src="../assets/logo.png" alt="" srcset="">
+            <img style="cursor: pointer" routerLink="/home" src="../assets/logo.png" alt="" srcset="">
         </div>
         <div class="menu" *ngIf="width > 640">
             <p routerLink="/home">Regresar</p>
@@ -104,17 +104,7 @@
 
             <div class="row-reverse">
 
-
-                <!-- <div>
-                    <button (click)="openFilter()" class="searchButton" href="#">
-                        <i class="material-icons">
-                            filter_list
-                        </i>
-                    </button>
-                </div> -->
-
                 <div class="searchBox">
-
                     <input [(ngModel)]="searchText" (ngModelChange)="filterByName()" class="searchInput" type="text"
                         placeholder="Buscar..">
                 </div>
@@ -131,11 +121,11 @@
 
                 <ng-container *ngFor="let product of productsFiltered">
                     <div class="card">
-                        <!-- <div class="card" >  -->
-
-
+                        <div class="discount-label" *ngIf="product.discount != '0'">
+                            <span>Descuento</span>
+                        </div>
+     
                         <div class="card-header">
-                            <!--  -->
                             <div class="row">
                                 <div>
                                     <div class="row">
@@ -146,8 +136,6 @@
 
                                     <p class="subtitle category">{{ product.category }}</p>
                                 </div>
-
-
 
                             </div>
                         </div>
@@ -161,7 +149,12 @@
                                 <p class="subtitle category bold">{{ product.brand | titlecase }}</p>
                             </div>
 
-                            <p class="price bold">{{ product.price | currency:'₡':'symbol':'4.0' }}</p>
+                            <div class="colm">
+                                <span class="price bold" *ngIf="product.discount == '0'">{{ product.price | currency:'₡':'symbol':'4.0' }} <br></span>
+                                <span class="price bold price-discount" *ngIf="product.discount != '0'">{{ product.price | currency:'₡':'symbol':'4.0' }} <br></span>
+                                <span class="price bold" *ngIf="product.discount != '0'">{{ product.discount | currency:'₡':'symbol':'4.0' }} <br></span>
+                            </div>
+
                         </div>
                         <div>
 
@@ -191,15 +184,19 @@
 
 </div>
 
-
+<!-- /////////////////////   Modal Detail   //////////////////////////////// -->
 
 <div class="modal-detail" *ngIf="isDetailOpen">
+    <div class="discount-label" *ngIf="productDetail.discount != '0'">
+        <span>Descuento</span>
+    </div>
     <div class="close" (click)="openDetails()">X</div>
     <div class="container-detail" [ngStyle]="{background: productDetail.color}">
 
         <div class="image">
             <img [src]="productDetail.photo_url" alt="">
         </div>
+
         <div class="detail">
             <p class="title" style="text-align: end; font-size: 26px;">
                 {{ productDetail.name }}
@@ -212,13 +209,7 @@
                 <p class="body" style="font-size: 16px; color: #929292;">{{ productDetail.description }}</p>
             </section><br><br>
 
-            <p class="body" style="font-size: 11px; color: #929292; margin-bottom: 6px;">Colores del producto</p>
-            <div class="row">
-                <ng-container *ngFor="let color of productDetail.colors">
-                    <div class="dot" [ngStyle]="{background: color}"></div>
-                </ng-container>
-
-            </div><br><br>
+           
 
 
 

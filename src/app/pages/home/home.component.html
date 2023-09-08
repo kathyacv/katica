@@ -10,6 +10,19 @@
         <p (click)="scroll(phrases)"> Recomendaciones </p>
         <p (click)="scroll(contactus)"> Contáctenos </p>
       </div>
+
+      <div class="menu" *ngIf="width < 640">
+        <svg (click)="openMenu()" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 5C3.44772 5 3 5.44772 3 6C3 6.55228 3.44772 7 4 7H20C20.5523 7 21 6.55228 21 6C21 5.44772 20.5523 5 20 5H4ZM7 12C7 11.4477 7.44772 11 8 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H8C7.44772 13 7 12.5523 7 12ZM13 18C13 17.4477 13.4477 17 14 17H20C20.5523 17 21 17.4477 21 18C21 18.5523 20.5523 19 20 19H14C13.4477 19 13 18.5523 13 18Z" fill="#000000"/>
+          </svg>
+      </div>
+      
+    </div>
+
+    <div class="menu-container" *ngIf="menuContainer">
+      <p routerLink="/catalogue">Productos</p>
+      <p (click)="scroll(phrases)"> Recomendaciones </p>
+      <p (click)="scroll(contactus)"> Contáctenos </p>
     </div>
 
     <div class="background"></div>
@@ -25,7 +38,7 @@
           <!-- <h3 class=""> con los productos de KatiKat</h3><br> -->
 
           <p class="body">
-            Consigue todos lo productos que necesitas en la tienda de Katikat
+            Consigue todos lo productos que necesitas en la tienda de Katykat
             <!-- Haz de tu piel una obra de arte: descubre nuestras opciones de cosméticos y skincare para realzar tu belleza natural -->
           </p>
         </div>
@@ -42,21 +55,7 @@
         </div><br><br>
 
         <div class="products-home">
-          <!-- <div class="product-card">
-                  <div class="product-image">
-                    <img src="../assets/images/desmaquillante.webp" alt="" srcset="">
-                  </div>
-                  <div class="product-info">
-                    <div class="product-data">
-                      <p class="product-name">Desmaquillante</p>
-                      <p class="product-price">₡2000</p>
-                      <p class="product-discount">-35%</p>
-                    </div>
-                  </div>
-                </div> -->
-
-
-          <div class="product-card-home" *ngFor="let product of getDiscountProducts()">
+          <div class="product-card-home" *ngFor="let product of productsWithDiscount">
             <div class="left">
               <img [src]="product.photo_url" alt="shoe">
             </div>
@@ -68,17 +67,19 @@
                 <div class="details">
                   <h3>{{ product.brand }}</h3>
 
-                  <h4><span class="fa fa-dollar"></span>{{ product.price | currency:'₡':'symbol':'4.0' }}</h4>
-                  <h4 class="dis"><span class="fa fa-dollar"></span>{{ product.price | currency:'₡':'symbol':'4.0' }}
-                  </h4>
+                  <div class="column">
+                    <span class="dis"><span class="fa fa-dollar"></span>{{ product.price | currency:'₡':'symbol':'4.0' }}</span>
+                    <span class="discount-label"><span class="fa fa-dollar"></span>{{ product.discount | currency:'₡':'symbol':'4.0' }}</span>
+                  </div>
+
+                  
+                  
                 </div>
-                <span class="foot"><i class="fa fa-shopping-cart"></i>Agregar</span>
+                <span (click)="sendToCart(product.id)" class="foot" *ngIf="!isInCart(product.id)"><i class="fa fa-shopping-cart"></i></span>
+                <span (click)="deleteCartProduct(product.id)" class="foot" *ngIf="isInCart(product.id)" style="background: #e85f5f"><i class="fa fa-trash"></i></span>
               </div>
             </div>
           </div>
-
-
-
         </div>
 
       </div>
@@ -95,7 +96,7 @@
       </p>
     </div>
 
-    <div class="recommended-product">
+    <div class="recommended-product" *ngIf="productRecommended">
       <div class="header">
         <p>Producto recomendado</p>
       </div>
@@ -111,9 +112,7 @@
           <p class="name"><b>{{ recommended_product.name }}</b></p>
           <p class="brand"><b>{{ recommended_product.brand }}</b></p><br>
 
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, necessitatibus ad iusto excepturi
-            voluptate consectetur ab vitae assumenda, quae praesentium, exercitationem autem? Iusto sint libero id
-            quaerat, nostrum necessitatibus animi!</p>
+          <p>{{ productRecommended[0].description }}</p>
         </div>
       </div>
 

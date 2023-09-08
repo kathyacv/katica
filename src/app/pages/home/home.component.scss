@@ -1,202 +1,14 @@
-// .wrapper {
-//     height: 100vh;
-//     overflow-y: auto;
-//     overflow-x: hidden;
-//     perspective: 10px;
-// }
-
-// .content {
-//     height: 100%;
-//     display: flex;
-//     flex-direction: row;
-//     position: relative;
-//     top: 90px;
-//     align-items: flex-end;
-//     transform-style: preserve-3d;
-// }
-
-
-
-// .body {
-//     color: #555555;
-// }
-
-
-// .background {
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     position: absolute;
-//     background: var(--background);
-
-//     //transform: translateZ(-10px) scale(2);
-
-// }
-
-// .picture {
-//     // z-index: 0;
-//     // height: 100%;
-//     // right: -21%;
-//     // position: absolute;
-//     // top: -22px;
-//     // display: flex;
-//     // justify-content: flex-end;
-//     // width: 100%;
-//     z-index: 0;
-//     height: 76%;
-//     right: 0;
-//     position: absolute;
-//     /* top: 10%; */
-//     display: flex;
-//     justify-content: flex-end;
-//     height: 100%;
-
-//     img {
-//         width: 64%;
-//         object-fit: contain;
-//         // width: 100%;
-//         // object-fit: cover;
-//     }
-// }
-
-
-// // .card.b {
-// //     top: 76%;
-// //     left: 6%;
-// //     width: 90%;
-// //     height: 200px;
-// //     background-image: url('../../../assets/images/products/p_a.jpeg');
-// // }
-
-// // .card.c {
-// //     top: 10%;
-// //     left: 28%;
-// //     width: 500px;
-// //     height: 260px;
-// //     background-image: url('../../../assets/images/products/p_a.jpeg');
-// // }
-
-// // .card.d {
-// //     top: 40%;
-// //     left: 60%;
-// //     width: 250px;
-// //     height: 330px;
-// //     background-image: url('../../../assets/images/products/p_a.jpeg');
-// // }
-
-// // .card.e {
-// //     top: 40%;
-// //     left: 28%;
-// //     width: 220px;
-// //     height: 300px;
-// //     background-image: url('../../../assets/images/products/p_a.jpeg');
-// // }
-
-// .cards {
-//     color: #652882;
-//     height: 200px;
-//     padding: 10px 0;
-//     overflow-x: scroll;
-//     overflow-y: hidden;
-//     white-space: nowrap;
-
-// .card {
-//     width: 250px;
-//     height: 100%;
-//     cursor: pointer;
-//     color: #555555;
-//     margin-right: 70px;
-//     vertical-align: top;
-//     display: inline-block;
-//     height: calc(100% - 20px);
-
-//     .imagen {
-//         z-index: 999;
-//         height: 100%;
-//         position: relative;
-
-//         img {
-//             height: 100%;
-//             object-fit: cover;
-//         }
-//     }
-
-//     .card-info {
-//         top: -50%;
-//         width: 100%;
-//         padding: 26px;
-//         display: flex;
-//         position: relative;
-//         border-radius: 10px;
-//         background: #f8f3f7;
-//         justify-content: flex-end;
-
-//         .data {
-//             width: 50%;
-
-//             .name {
-//                 font-size: 14px;
-//                 font-weight: 400;
-//             }
-
-//             .price {
-//                 font-size: 20px;
-//                 font-weight: 800;
-//             }
-
-//             .discount {
-//                 font-size: 12px;
-//                 font-weight: 400;
-//             }
-//         }
-//     }
-// }
-
-
-
-
-// @media screen and (min-width: 800px) {
-//     .content .info {
-//         width: 50vw;
-//         padding: 3.5em;
-//         z-index: 9999;
-//         top: 0;
-//         position: absolute;
-//         height: calc(100% - 80px);
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: space-between;
-
-//         .header-info {
-//             margin-top: 50px;
-//         }
-//     }
-
-//     // .content .picture {
-//     //     visibility: hidden;
-//     // }
-// }
-
-// @media screen and (max-width: 800px) {
-//     .content .info {
-//         top: 0;
-//         width: 100%;
-//         z-index: 99;
-//         padding: 26px;
-//         display: flex;
-//         position: absolute;
-//         flex-direction: column;
-//         justify-content: flex-end;
-//         height: calc(100% - 90px);
-//         backdrop-filter: blur(5px);
-//         background: rgba(244, 244, 244, 0.8);
-//         box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
-//     }
-// }
-
-
-
+.menu-container {
+  top: 100px;
+  position: absolute;
+  background: var(--background);
+  width: 100%;
+  padding: 26px;
+  p {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+}
 
 
 .buttons {
@@ -358,6 +170,7 @@ section {
 section.phrases {
   gap: 3rem;
   width: 100%;
+  min-height: 100vh;
   display: grid;
   position: relative;
   background: #fff;
@@ -457,8 +270,11 @@ section.phrases {
 
 
 section.contact {
+  min-height: 100vh;
   padding: 0 !important;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   svg.letter {
     width: 100%;
     height: 28rem;
@@ -527,8 +343,11 @@ section.contact {
   }
 
   .container {
+    height: 100%;
     width: 100%;
     display: grid;
+    align-items: center;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
@@ -652,37 +471,12 @@ section.contact {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
     display: none;
   }
-
-  // .product-card {
-  //     height: 100%;
-  //     flex: 0 0 auto;
-  //     .product-image {
-  //         height: 100%;
-  //         img {
-  //             width: auto;
-  //             height: 100%;
-  //             object-fit: cover;
-  //         }
-  //     }
-  //     .product-info {
-  //         .product-data {
-  //             .product-name {
-
-  //             }
-  //             .product-price {
-
-  //             }
-  //             .product-discount {
-
-  //             }
-  //         }
-  //     }
-  // }
 
   h1 {
     color: #338781;
@@ -691,14 +485,14 @@ section.contact {
     font-size: 16px;
     margin-top: 16px;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    //white-space: nowrap;
     overflow: hidden;
   }
 
 
 
   h3 {
-    color: #ffffff;
+    color: #c1c1c1;
     font-family: "muli";
     margin-top: 6px;
     font-size: 14px;
@@ -707,27 +501,27 @@ section.contact {
 
 
 
-  h4 {
+  .discount-label {
     display: inline-block;
-    color: #ffffff;
+    color: #338781;
     font-family: "muli";
-    margin-top: 12px;
+
     font-weight: bold;
     font-size: 20px;
   }
 
-  h4.dis {
+  .dis {
+    margin-top: 12px;
     display: inline-block;
-    color: #ffffff;
+    color: #c1c1c1;
     font-family: "muli";
     font-weight: 400;
     font-size: 17px;
-    margin-left: 30px;
-    text-decoration: line-through #ea3201;
+    text-decoration: line-through #c1c1c1;
   }
 
   h4.dis span {
-    text-decoration: line-through #ea3201;
+    text-decoration: line-through #e55555;
   }
 
   .discount {
@@ -747,22 +541,21 @@ section.contact {
 
   .foot {
     color: #ffffff;
+    background: #338781;
     font-family: "muli";
-    margin-top: 20px;
-    margin-right: 50px;
     font-weight: 500;
-    font-size: 11px;
-    float: left;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 8px 10px;
     transition: 0.3s all ease;
+    top: -8px;
+    right: -8px;
+    position: absolute;
   }
 
-  .foot i:nth-child(1) {
-    margin-left: 0;
-    margin-right: 15px;
-  }
 
   .foot:hover {
-    color: #f76b39;
+    color: #e5e5e5;
     cursor: pointer;
   }
 
@@ -773,11 +566,13 @@ section.contact {
   .product-card-home {
     display: flex;
     align-items: center;
-    background: #368f88; //#103d39;
+    background: #ffffff; //#103d39;
     height: 200px;
     width: 280px;
-    border-radius: 6px;
-    margin: 2% 20px 0 20px
+    border-radius: 12px;
+    position: relative;
+    margin: 2% 20px 0 20px;
+    box-shadow: 2px 4px 20px -7px rgba(0, 0, 0, 0.33);
   }
 
   .left {
@@ -786,9 +581,9 @@ section.contact {
     width: 120px;
     display: flex;
     align-items: center;
-    background-color: var(--primary);
+    background: #ffffff;
     //margin-left: 93px;
-    border-radius: 0% 50% 50% 0%;
+    // border-radius: 0% 50% 50% 0%;
     z-index: 5;
     overflow: hidden;
   }
@@ -797,7 +592,7 @@ section.contact {
     width: auto;
     height: 100%;
     object-fit: contain;
-    margin-left: -28px;
+    margin-left: -6px;
 
   }
 
@@ -805,7 +600,7 @@ section.contact {
     content: "";
     height: 150px;
     width: 220px;
-    background-color: #56c0b7; //#2a2f40;
+    background-color: #ffffff; //#2a2f40;
     z-index: 3;
     margin-left: -50px;
   }
